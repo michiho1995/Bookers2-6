@@ -1,30 +1,37 @@
- <h2>User info</h2>
- <img class="attachment user profile_image fallback" src="/assets/no_image-ede28af4bad96368ef41be1b4be1cffce0d9402540f75d17895e32cb0d2af5e6.jpg" alt="No image">
- <table class="table">
-      <tbody>
-       <div class="profile-container">
-         <h3 class="profile-name"><%= user.name %></h3>          <!--@user → user-->
-         <h3 class="profile-introduction"><%= user.introduction %></h3>  <!--@user → user-->
-         <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "noimage.jpg",size:"50x50" %>
-         <% if user.id == current_user.id %>
-             <p><%= link_to "プロフィール編集", edit_user_path(user), class: "pull-right" %></p>
-         <% end %>
-
-       </div>
-      </tbody>
-</table>
-
- <h2>New book</h2>
  <% if book.errors.any? %>   <!-- @book → book -->
    <h3><%= book.errors.count %>error prohibited this book from being saved:</h3>   <!-- @book → book -->
    <% book.errors.full_messages.each do |message| %>    <!-- @book → book -->
      <p><%= message %></p>
    <% end %>
  <% end %>
- <%= form_with model: book, url:'/books', local:true do |f| %>   <!-- @book → book -->
-  <h5>Title</h5>
-  <%= f.text_field :title %>
-  <h5>Opinion</h5>
-  <%= f.text_area :body %><br>
-  <%= f.submit 'Create Book'  %>
-<% end %>
+
+
+   <h2>User info</h2>
+   <table class="table">
+        <tbody>
+           <%= attachment_image_tag user, :profile_image, :fill, 100, 100,  fallback: "no_image.jpg",size: "100x100" %>
+             <tr>
+              <th class="profile-name">name      <%= user.name %></th>          <!--@user → user-->
+             </tr>
+             <tr>
+              <th class="profile-introduction">introduction      <%= user.introduction %></th>  <!--@user → user-->
+             </tr>
+        </tbody>
+   </table>
+             <% if user.id == current_user.id %>
+                <p><%= link_to edit_user_path(user) do %>
+                   <span class= "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_26318"></span>
+                   <% end %>
+                </p>
+             <% end %>
+   <br>
+   <br>
+
+   <h2>New book</h2>
+     <%= form_with model: book, local:true do |f| %>   <!-- @book → book -->
+       <h5>Title</h5>
+     <%= f.text_field :title %>
+       <h5>Opinion</h5>
+     <%= f.text_area :body %>
+     <%= f.submit 'Create Book',class:"btn btn-primary" %>
+     <% end %>
