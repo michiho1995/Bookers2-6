@@ -26,12 +26,13 @@
              <% end %>
    <br>
    <br>
-
    <h2>New book</h2>
      <%= form_with model: book, local:true do |f| %>   <!-- @book → book -->
        <h5>Title</h5>
-     <%= f.text_field :title %>
+     <%= f.text_field :title, class:"col-xs-12" %>
        <h5>Opinion</h5>
-     <%= f.text_area :body %>
-     <%= f.submit 'Create Book',class:"btn btn-primary" %>
+     <%= f.text_area :body, class:"col-xs-12" %><br>
+ <br>
+ <br>
+     <%= f.submit 'Create Book', class:"col-xs-12 btn btn-primary" %>
      <% end %>
