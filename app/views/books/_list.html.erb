@@ -16,14 +16,22 @@
              <tr>
               <th class="profile-introduction">introduction      <%= user.introduction %></th>  <!--@user → user-->
              </tr>
+             <tr>
+              <th class="profile-stats"><%= render 'users/stats' %></th>
+             </tr>
+             <tr>
+              <th class="profile-follow_form"><%= render 'users/follow_form',user: @user %></th>
+             </tr>
         </tbody>
    </table>
-             <% if user.id == current_user.id %>
-                <p><%= link_to edit_user_path(user) do %>
-                   <span class= "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_26318"></span>
-                   <% end %>
-                </p>
-             <% end %>
+
+   <% if user.id == current_user.id %>
+     <p>
+      <%= link_to edit_user_path(user) do %>
+        <span class= "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_26318"></span>
+      <% end %>
+     </p>
+   <% end %>
    <br>
    <br>
    <h2>New book</h2>
