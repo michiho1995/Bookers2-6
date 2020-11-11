@@ -26,25 +26,11 @@
                 <td><%= attachment_image_tag @user, :profile_image, :fill, 40, 40,  fallback: "no_image.jpg",size: "40x40" %></td>
                 <td><%= link_to book.title, book_path(book) %></td>
                 <td><%= book.body %></td>
-                <td>
-                    <% if book.favorited_by?(current_user) %>
-                      <td>
-                        <%= link_to book_favorites_path(book), method: :delete do %>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <%= book.favorites.count %>
-                        <% end %>
-                      </td>
-                    <% else %>
-                      <td>
-                        <%= link_to book_favorites_path(book), method: :post do %>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            <%= book.favorites.count %>
-                        <% end %>
-                      </td>
-                    <% end %>
+                <td id='like-button_<% book.id %>'>
+                  <%= render 'favorites/like-button', book: book %>
                 </td>
                 <td>
-                  <%= link_to "コメント数#{book.book_comments.count} ", book_path(book.id) %>
+                  <%= render 'book_comments/index', book: book %>
                 </td>
               </tr>
           <% end %>

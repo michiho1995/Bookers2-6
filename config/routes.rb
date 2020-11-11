@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/about'
 
-  resources :books, only: [:new, :create, :index, :show] do
+  resources :books, only: [:new, :create, :index, :show, :edit] do
     resource :favorites, only: [:create, :destroy]
-    resources :book_comments, only: [:create, :destroy]
+    resources :book_comments, only: %i[create edit update destroy]
   end
 
   resources :users, only: [:show, :edit, :update, :index]
@@ -25,7 +25,5 @@ Rails.application.routes.draw do
     end
   end
   resources :relationships, only: [:create, :destroy]
-
-
 
 end

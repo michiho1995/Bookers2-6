@@ -1,0 +1,4 @@
+$("#each_comment_<%= @book.id %>").html("<%= j(render 'book_comments/comments', book: @book) %>");
+$("#comments_area_<%= @book.id %>").html("<%= j(render 'book_comments/index', book: @book) %>");
+$("textarea").val('');
+

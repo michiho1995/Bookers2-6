@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :books
+  has_many :books, dependent: :destroy
   has_many :book_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :following_relationships, foreign_key: "follower_id", class_name: "Relationship", dependent: :destroy
@@ -22,13 +22,13 @@ class User < ApplicationRecord
   def unfollow!(other_user)
     following_relationships.find_by(following_id: other_user.id).destroy
   end
-  
+
   attachment :profile_image
 
   validates :name, presence: true,
                    length: { minimum: 2, maximum: 20 }
   validates :introduction, length: { maximum: 50 }
-  
+
   def self.search(search,word)
       if search == "forward_match"
         @user = User.where("name LIKE?","#{word}%")
